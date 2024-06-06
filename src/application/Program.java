@@ -33,5 +33,13 @@ public class Program {
         for (Seller obj : list) {
             System.out.println(obj);
         }
+
+        System.out.println();
+
+
+        System.out.println("==== TESTE 4: SELLER INSERT ====");
+        Seller newSeller = new Seller(department, 4000.00, new Date(),"greg@gmail.com", "Greg", null);
+        sellerDao.insert(newSeller);
+        System.out.println("Inserted! Novo Id = " + newSeller.getId());
     }
 }
