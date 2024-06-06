@@ -29,5 +29,13 @@ public class Program2 {
         Department department1 = new Department(null, "Music");
         departmentDao.insert(department1);
         System.out.println("Inserido.\nNovo id: " + department1.getId());
+
+        System.out.println();
+
+        System.out.println("==== ATUALIZAR DADOS ====");
+        Department department2 = departmentDao.findById(7);
+        department2.setName("Cinema");
+        departmentDao.update(department2);
+        System.out.println("ATUALIZAÇÃO FEITA COM SUCESSO");
     }
 }
