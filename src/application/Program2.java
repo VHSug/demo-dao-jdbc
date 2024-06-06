@@ -22,5 +22,12 @@ public class Program2 {
         for (Department obj : list) {
             System.out.println(obj);
         }
+
+        System.out.println();
+
+        System.out.println("==== INSERIR DADOS NO DEPARTAMENTO ====");
+        Department department1 = new Department(null, "Music");
+        departmentDao.insert(department1);
+        System.out.println("Inserido.\nNovo id: " + department1.getId());
     }
 }
