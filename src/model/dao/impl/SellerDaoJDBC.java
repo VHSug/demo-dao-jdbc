@@ -53,6 +53,9 @@ public class SellerDaoJDBC implements SellerDao {
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         }
+        finally {
+            DB.closeStatement(st);
+        }
     }
 
     @Override
@@ -76,13 +79,29 @@ public class SellerDaoJDBC implements SellerDao {
         }
         finally {
             DB.closeStatement(st);
-            DB.closeConnection();
         }
     }
 
     @Override
     public void deleteById(Integer id) {
+        PreparedStatement st = null;
+        try {
+            st = conn.prepareStatement("DELETE FROM seller\n" +
+                    "WHERE Id = ?");
 
+            st.setInt(1, id);
+
+            st.executeUpdate();
+            int rows = st.executeUpdate();
+            if (rows == 0) {
+                throw new DbException("ID Não encontrado!");
+            }
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }finally {
+            DB.closeStatement(st);
+            DB.closeConnection();
+        }
     }
 
     @Override
@@ -108,6 +127,8 @@ public class SellerDaoJDBC implements SellerDao {
 
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
+        }finally {
+            DB.closeStatement(st);
         }
     }
 
@@ -159,6 +180,8 @@ public class SellerDaoJDBC implements SellerDao {
 
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
+        }finally {
+            DB.closeStatement(st);
         }
     }
 
@@ -194,6 +217,8 @@ public class SellerDaoJDBC implements SellerDao {
 
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
+        }finally {
+            DB.closeStatement(st);
         }
     }
 }
